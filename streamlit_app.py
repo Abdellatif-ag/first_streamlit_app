@@ -12,11 +12,13 @@ def get_fruityvice_data(this_fruit_choice):
 def get_fruit_load_list():
   with my_cnx.cursor() as my_cur:
     my_cur.execute("SELECT * from fruit_load_list")
+    my_cnx.close()
     return my_cur.fetchall()
     
 def insert_row_snowflake(fruit):
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from streamlit')")
+    my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('" +fruit +"')")
+    my_cnx.close()
     return 'Thanks for adding ' + fruit
     
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
